@@ -5,4 +5,9 @@ class BookFilter(FilterSet):
 
     class Meta:
         model = Book
-        fields = ['name', 'edition', 'publication_year', 'authors']
+        fields = {
+            'name': ['exact', 'contains'],
+            'edition': ['exact', 'contains'],
+            'publication_year': ['exact', 'contains'],
+            'authors': ['exact', 'contains'],   
+        }

@@ -1,16 +1,24 @@
 from django.shortcuts import render
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+from rest_framework.pagination import PageNumberPagination
 from rest_framework import status
 from .models import Author, Book
 from .serializers import AuthorSerializer, BookSerializer
+from .filters import BookFilter
 
 # Create your views here.
 
 @api_view(['GET', 'POST'])
 def multiple_authors(request):
+    paginator = PageNumberPagination()
+    paginator.page_size = 5
+
     authors = Author.objects.all()
-    serializer = AuthorSerializer(authors, many=True)
+
+    queryS = paginator.paginate_queryset(authors, request)
+
+    serializer = AuthorSerializer(queryS, many=True)
     print(serializer)
     return Response(serializer.data)
 
@@ -37,8 +45,14 @@ def single_author(request, pk):
 @api_view(['GET', 'POST'])
 def multiple_books(request):
     if request.method == 'GET':
+        print(request.GET)
         books = Book.objects.all()
-        serializer = BookSerializer(books, many=True)
+
+        book_filter = BookFilter(request.GET , queryset=books)
+        if book_filter.is_valid():
+            queryS = book_filter.qs
+            print(queryS)
+        serializer = BookSerializer(queryS, many=True)
         print(serializer.data)
         return Response(serializer.data)
 
