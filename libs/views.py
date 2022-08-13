@@ -62,7 +62,7 @@ def multiple_books(request):
         if serializer2.is_valid():
             serializer2.save()
             
-            return Response(serializer2.data, status=status.HTTP_201_CREATED)
+        return Response(serializer2.data, status=status.HTTP_201_CREATED)   
 
 
 @api_view(['GET', 'PUT', 'DELETE'])
