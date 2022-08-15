@@ -128,5 +128,7 @@ dmypy.json
 .pyre/
 .vscode/
 .vscode
+vscode/
+vscode
 .pytest_cache/
 .pytest_cache
