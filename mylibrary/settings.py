@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 
 from pathlib import Path
 from decouple import config
+import django_on_heroku
 # from dotenv import load_dotenv
 # load_dotenv()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -137,3 +138,6 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CORS_ALLOW_ALL_ORIGINS = True
+
+
+django_on_heroku.settings(locals())
