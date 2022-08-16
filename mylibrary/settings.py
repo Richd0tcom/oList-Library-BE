@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     "corsheaders",
     "django_filters",
     "gunicorn",
+    "drf_yasg"
     
 ]
 
